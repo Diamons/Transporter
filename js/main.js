@@ -147,19 +147,19 @@ Behaviors.transporter = function(context) {
       if(inTransporterMotion || window.transporterActivated) {
         return;
       }
+      $(window).disablescroll();
       window.transporterActivated = true;
       inTransporterMotion = true;
-      // console.log('B');
       $transporter.show();
       $("html, body").animate({ scrollTop: $('body').height() - $(window).height() }, "slow").promise().done(function() {
         inTransporterMotion = false;
         if(!$transporterContent.hasClass('theme--inverted')) {
           $transporterContent.fadeTo(300, 0.3);
         }
-        // console.log('C');
         $transporter.fadeTo(200, 1, function() {
           $transporter.css({'margin-bottom': ($(window).height()*2)});
         });
+        $(window).disablescroll('undo');
       });
     }
 
